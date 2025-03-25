@@ -17,7 +17,7 @@ Pastikan Anda memiliki Node.js dan npm terinstal di mesin Anda.
 
 ### 1. Clone Repository
 ```bash
- git clone https://github.com/samuelsteven0902/project-name.git
+ git clone https://github.com/samuelsteven0902/Next.js-application-with-PDF-generation/.git
  cd project-name
 ```
 
