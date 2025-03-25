@@ -124,65 +124,66 @@ const confirmDelete = async () => {
 };
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="md:p-4 space-y-4">
    <div className="space-y-6 bg-gray-200 p-6 rounded">
   
-  <div className="w-full space-y-2 text-">
-    <h1 className="text-3xl font-semibold">Export Data</h1>
+  <div className="w-full space-y-1 md:space-y-2 text-">
+    <h1 className=" md:text-3xl font-semibold">Export Data</h1>
     <hr className="border border-gray-400" />
   </div>
 
-  <div className="flex justify-between items-end gap-6  ">
-    <div className="w-1/3 space-y-4">
+  <div className="md:flex justify-between space-y-2 md:space-y-4 items-end   ">
+    
+    <div className="w-full md:w-1/3 space-y-2 md:space-y-4">
 
-    <div className="flex items-center gap-2 ">
-      <label htmlFor="template" className="text-lg font-semibold">Pilih Template:</label>
-      <select
-        id="template"
-        value={template}
-        onChange={handleTemplateChange}
-        className="text-lg font-bold bg-gray-100 p-2 rounded-lg"
-      >
-        <option value="table">Table List</option>
-        <option value="card">Card List</option>
-      </select>
-    </div>
+      <div className="flex items-center gap-2 ">
+        <label htmlFor="template" className="md:text-lg text-sm font-semibold">Pilih Template:</label>
+        <select
+          id="template"
+          value={template}
+          onChange={handleTemplateChange}
+          className="text-base  md:font-bold bg-gray-100 p-1 md:p-2 rounded-lg"
+        >
+          <option value="table">Table List</option>
+          <option value="card">Card List</option>
+        </select>
+      </div>
 
-      <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1">
-          <AccordionTrigger className="text-lg font-bold bg-gray-100 p-2 rounded-lg">
-            Filter Data
-          </AccordionTrigger>
-          <AccordionContent className="p-4 bg-gray-50 rounded-b-lg">
-            <h3 className="text-lg font-bold mb-2">Select Columns:</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {columns.map(col => (
-                <label key={col.key} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    value={col.key}
-                    checked={selectedColumns.includes(col.key)}
-                    onChange={handleColumnChange}
-                    className="mr-1"
-                  />
-                  {col.label}
-                </label>
-              ))}
-            </div>
-            <Button onClick={handleResetColumns} className="mt-4 bg-red-500 text-white">
-              Reset
-            </Button>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger className="text-sm md:text-lg font-semibold bg-gray-100 md:p-2 p-1 rounded-lg">
+              Filter Data
+            </AccordionTrigger>
+            <AccordionContent className="p-4 bg-gray-50 rounded-b-lg">
+              <h3 className="text-lg font-bold mb-2">Select Columns:</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {columns.map(col => (
+                  <label key={col.key} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      value={col.key}
+                      checked={selectedColumns.includes(col.key)}
+                      onChange={handleColumnChange}
+                      className="mr-1"
+                    />
+                    {col.label}
+                  </label>
+                ))}
+              </div>
+              <Button onClick={handleResetColumns} className="mt-4 bg-red-500 text-white">
+                Reset
+              </Button>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
     </div>
 
     {/* Action Buttons */}
-    <div className="flex gap-2 justify-end bottom-0  h-full">
-      <Button onClick={generatePDF} className="bg-blue-500 text-white">
+    <div className="flex gap-2 justify-end bottom-0  h-full ">
+      <Button size={"sm"} onClick={generatePDF} className="bg-blue-500 text-white">
         Download PDF
       </Button>
-      <Button onClick={()=>handlePrint()} className="bg-green-500 text-white">
+      <Button size={"sm"} onClick={()=>handlePrint()} className="bg-green-500 text-white  ">
         Preview
       </Button>
     </div>
@@ -191,7 +192,7 @@ const confirmDelete = async () => {
 
   
     {/* Preview Section */}
-    <div ref={pdfRef} className="p-4  bg-white rounded mb-4">
+    <div ref={pdfRef} className="py-2 md:p-4 text-xs md:text-base bg-white rounded mb-4  overflow-x-auto">
       {/* <h3 className="text-3xl font-semibold mb-2">User Profiles</h3> */}
     
       {template === "table" && (
@@ -201,7 +202,7 @@ const confirmDelete = async () => {
               {columns.filter(col => selectedColumns.includes(col.key)).map(col => (
                 <th key={col.key} className="border p-2">{col.label}</th>
               ))}
-              <th className="border p-2 action-column no-print ">Action</th>
+              <th className="border p-2 action-column no-print sticky right-0 bg-gray-200">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -216,7 +217,7 @@ const confirmDelete = async () => {
                 {selectedColumns.includes("phone") && <td className="border p-2">{user.phone}</td>}
                 {selectedColumns.includes("website") && <td className="border p-2">{user.website}</td>}
                 {selectedColumns.includes("company") && <td className="border p-2">{user.company.name}</td>}
-                <td className="border p-2 action-column no-print">
+                <td className="border md:p-2 p-1 bg-white action-column no-print sticky right-0 space-y-1 items-center justify-center flex flex-col md:block ">
                     <Button variant="outline" size="sm" onClick={() => handleEdit(user)}>
                       Edit
                     </Button>
